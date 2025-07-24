@@ -2,7 +2,7 @@
 
 O **EventStream** é um microSaaS voltado para o recebimento, roteamento e monitoramento de eventos via webhooks. Permite que empresas ou aplicações registrem seus próprios webhooks, recebam notificações externas (ex: nova venda, novo usuário, envio de formulário) e reencaminhem esses eventos para múltiplos canais como Discord, Slack, e-mail ou endpoints personalizados.
 
-Além disso, conta com persistência dos eventos em MongoDB, sistema de retries com Redis e painel de administração opcional (React) para visualizar eventos recebidos, falhas e reprocessamentos.
+Além disso, conta com persistência dos eventos em MongoDB, sistema de retries com Redis e painel de administração (React) para visualizar eventos recebidos, falhas e reprocessamentos.
 
 ### Tecnologias principais
 - Node.js + Express
