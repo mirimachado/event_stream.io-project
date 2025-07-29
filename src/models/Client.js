@@ -1,6 +1,6 @@
 class Client {
-    constructor(id, name, email, apiKey) {
-        this.id = id;                      
+    constructor(name, email, apiKey) {
+                       
         this.name = name;                  
         this.email = email;                
         this.apiKey = apiKey;             

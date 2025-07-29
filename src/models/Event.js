@@ -1,6 +1,6 @@
 class Event {
-    constructor(id, clientId, payload, destinationUrls) {
-        this.id = id;                          
+    constructor(clientId, payload, destinationUrls) {
+                           
         this.clientId = clientId;             
         this.payload = payload;               
         this.status = 'pending';               
