@@ -1,12 +1,19 @@
-class Client{
-    constructor(name, email) {
-        this.id = id;
-        this.name = name;
-        this.email = email;
+class Client {
+    constructor(id, name, email, apiKey) {
+        this.id = id;                      
+        this.name = name;                  
+        this.email = email;                
+        this.apiKey = apiKey;             
+        this.webhooks = [];                
+        this.createdAt = new Date();       
     }
-    
+
+    addWebhook(url) {
+        this.webhooks.push(url);
+    }
+
     getDetails() {
-        return `Client Name: ${this.name}, Email: ${this.email}`;
+        return `Client: ${this.name}, Email: ${this.email}, Webhooks: ${this.webhooks.length}`;
     }
 }
 

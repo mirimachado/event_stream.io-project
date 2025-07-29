@@ -1,12 +1,23 @@
-class Event{
-    constructor(name, date, location) {
-        this.id = id;
-        this.name = name;
-        this.date = date;
-        this.location = location;
+class Event {
+    constructor(id, clientId, payload, destinationUrls) {
+        this.id = id;                          
+        this.clientId = clientId;             
+        this.payload = payload;               
+        this.status = 'pending';               
+        this.attempts = 0;                     
+        this.destinationUrls = destinationUrls; 
+        this.receivedAt = new Date();          
+        this.lastTriedAt = null;               
     }
-    
-    getDetails() {
-        return `Event: ${this.name}, Date: ${this.date}, Location: ${this.location}`;
+
+    markAsSent() {
+        this.status = 'sent';
+        this.lastTriedAt = new Date();
+    }
+
+    markAsFailed() {
+        this.status = 'failed';
+        this.lastTriedAt = new Date();
+        this.attempts++;
     }
 }
