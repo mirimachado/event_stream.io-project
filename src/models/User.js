@@ -1,5 +1,6 @@
 class User{
     constructor(name, email) {
+        this.id = id;
         this.name = name;
         this.email = email;
         this.password = '';
@@ -9,6 +10,7 @@ class User{
         this.token = '';
 
     }
+
     
     getName() {
         return this.name;

@@ -1,5 +1,6 @@
 class Event{
     constructor(name, date, location) {
+        this.id = id;
         this.name = name;
         this.date = date;
         this.location = location;
