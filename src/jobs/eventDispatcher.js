@@ -1,56 +1,58 @@
-export class Dispatcher{
-    constructor(){
+export class Dispatcher {
+    constructor() {
         this.events = {};
-
     }
 
-}
-
-function addLister (event, callback){
-    if(typeof callback !== "function"){
-        console.error(`The listener callback must be a function, the given type is ${typeof callback}`);
-        return false;
-
-    }
-
-    if(typeof event !== "string"){
-        console.error(`The event name must be a string, the given type is ${typeof event}`);
-        return false;
-
-    }
-
-    if(this.events[event] === undefined){
-        this.events[event] = {
-            listeners: []
+    addListener(event, callback) {
+        if (typeof callback !== "function") {
+            console.error(`O callback precisa ser uma função. Tipo recebido: ${typeof callback}`);
+            return false;
         }
 
+        if (typeof event !== "string") {
+            console.error(`O nome do evento precisa ser uma string. Tipo recebido: ${typeof event}`);
+            return false;
+        }
+
+        if (!this.events[event]) {
+            this.events[event] = {
+                listeners: []
+            };
+        }
+
+        this.events[event].listeners.push(callback);
     }
 
-    this.events[event].listeners.push(callback);
+    removeListener(event, callback) {
+        if (!this.events[event]) {
+            console.error(`O evento '${event}' não existe`);
+            return false;
+        }
 
-}
-
-function removeListener(event, callback){
-    if(this.events[event] === undefined){
-        console.error(`This event: ${event} does not exist`);
-        return false;
+        this.events[event].listeners = this.events[event].listeners.filter(
+            listener => listener.toString() !== callback.toString()
+        );
     }
 
-    this.events[event].listeners = this.events[event].listeners.filter(listener => {
-        return listener.toString() !== callback.toString();
-    })
+    dispatch(event, details) {
+        if (!this.events[event]) {
+            console.error(`O evento '${event}' não existe`);
+            return false;
+        }
 
-   
-}
+        this.events[event].listeners.forEach(listener => {
+            try {
+                listener(details);
+            } catch (error) {
+                console.warn(`Erro ao executar listener do evento '${event}':`, error);
 
-function dispatch(event, details){
-    if(this.events[event] === undefined){
-        console.error(`This event: ${event} does not exist`);
-        return false;
+                // Salvar a falha no localStorage
+                const failed = localStorage.getItem("failedEvents");
+                const failedArray = failed ? JSON.parse(failed) : [];
 
+                failedArray.push({ event, details });
+                localStorage.setItem("failedEvents", JSON.stringify(failedArray));
+            }
+        });
     }
-    this.events[event].listeners.forEach((listener)=> {
-        listener(details);
-    });
-
 }
