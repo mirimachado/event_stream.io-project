@@ -16,4 +16,4 @@ Além disso, conta com persistência dos eventos em MongoDB, sistema de retries 
 - Reencaminhamento para múltiplos destinos
 - Histórico completo de eventos
 - Retry automático em caso de falha
-- Painel (opcional) com visualização de métricas
+
